@@ -1,10 +1,8 @@
-/* AGUSTINA PEREZ JORDAN - PRACTICA */
+/* AGUSTINA PEREZ JORDAN - PRACTICA (Menu)*/
 
 #include <stdio.h>
 #include <math.h>
-#define PI = 3.141592
-
-//Modulo de interaccion con el usuario
+#include "funciones.h"
 
 int main () {
 
@@ -33,7 +31,7 @@ int main () {
                     float radio;
                     printf("Ingresar valor del radio: \n");
                     scanf("%f", &radio); 
-                    printf("El area del circulo es: %.3f\n", area_circulo(radio)); // Llamado a la funcion area_circulo
+                    printf("El area del circulo es: %.3f\n", area_circulo(radio) ); // Llamado a la funcion area_circulo
 
                 } else if (figura == 2) { // Se ha elegido el rectangulo
                     float largo, ancho;
@@ -53,7 +51,7 @@ int main () {
                     float radio;
                     printf("Ingresar valor del radio: \n");
                     scanf("%f", &radio); 
-                    printf("El perimetro del circulo es: %.3f\n", perimetro_circulo(radio)); // Llamado a la funcion perimetro_circulo
+                    printf("El perimetro del circulo es: %.3f\n", perimetro_circulo(radio) ); // Llamado a la funcion perimetro_circulo
 
                 } else if (figura == 2) { 
                     float largo, ancho;
@@ -64,21 +62,90 @@ int main () {
                 break;
             }
             
-            case 3: {
-                float x1, y1, x2, y2;
-                printf("Ingresar las coordenadas de las figuras (separados por un espacio): ");
-                scanf("%f %f %f %f", &x1, &y1, &x2, &y2);
-                printf("La distancia entre las figuras es: %.3f\n", distancia_figuras(x1, y1, x2, y2) ); // Llamado a la funcion distancia_figuras
+            case 3: { 
+                int figura;
+                printf("Seleccionar forma geometrica (1: Circulo, 2: Circulo y Rectangulo): \n");
+                scanf("%d", &figura);
+
+                if (figura == 1){
+                    float x1, y1, radio1, x2, y2, radio2;
+                    printf("Ingresar coordenadas de los centros y los radios de cada circulo: \n");
+                    scanf("%f %f %f %f %f %f", &x1, &y1, &radio1, &x2, &y2, &radio2);
+                    printf("La distancia entre los circulos es: \n", distancia_circulos);
+                     
+                } else if (figura == 2) {
+                    float rectangulo_x, rectangulo_y, largo, ancho, circulo_x, circulo_y, radio;
+                    printf("Ingresar coordenadas del centro y radio del circulo, ademas de las coordenadas, el largo y ancho del rectangulo: \n");
+                    scanf("%f %f %f %f %f %f %f", &rectangulo_x, &rectangulo_y, &largo, &ancho, &circulo_x, &circulo_y, &radio);
+                    printf("La distancia entre el circulo y el rectangulo es: \n", distancia_circulo_rectangulo);
+
+                }
+                
                 break;
             }
             
             case 4: {
-                float x1, y1, radio1, x2, y2, radio2;
-                printf("Ingresar las coordenadas y el radio de la primera figura: \n");
-                scanf("%f %f %f", &x1, &y1, &radio1);
-                printf("Ingresar las coordenadas y el radio de la segunda figura: \n");
-                scanf("%f %f %f", &x2, &y2, &radio2);
-                printf("Verificacion de colision: \n", colision_figuras()); // Llamado a la funcion colision_figuras
+                int colision;
+                printf("Seleccionar tipo de colision geometrica (1: Circulo-Circulo, 2: Circulo-Rectangulo, 3: Rectangulo-Rectangulo): \n");
+                scanf("%d", &colision);
+
+                switch (colision) {
+
+                    case 1: { // Circulo-Circulo
+                        printf("Calculo de colision Circulo-Circulo \n");
+
+                        float x1, y1, radio1, x2, y2, radio2;
+                        printf("Ingresar coordenadas del primer circulo: \n");
+                        scanf("%f %f %f ", &x1, &y1, &radio1);
+                        printf("Ingresar coordenadas del segundo circulo: \n");
+                        scanf("%f %f %f ", &x2, &y2, &radio2);
+
+                        if(colision_circulos (x1, y1, radio1, x2, y2, radio2)) {
+                            printf("Los circulos colisionan \n");
+                        } else {
+                            printf("Los circulos NO colisionan \n");
+                        }
+                            break;
+                    }
+                    
+                    case 2: { // Circulo-Rectangulo
+                        printf("Calculo de colision Circulo-Rectangulo \n");
+
+                        float rectangulo_x, rectangulo_y, largo, ancho, circulo_x, circulo_y, radio;
+                        printf("Ingresar coordenadas y radio del circulo: \n");
+                        scanf("%f %f %f ", &circulo_x, &circulo_y, &radio);
+                        printf("Ingresar coordenadas, largo y ancho del rectangulo: \n");
+                        scanf("%f %f %f %f", &rectangulo_x, &rectangulo_y, &largo, &ancho);
+
+                        if (colision_circulo_rectangulo (rectangulo_x, rectangulo_y, largo, ancho, circulo_x, circulo_y, radio)) {
+                            printf("Las figuras colisionan \n");
+                        } else {
+                            printf("Las figuras NO colisionan \n");
+                        }
+                            break;
+                        }
+                    
+                    
+                    case 3: { // Rectangulo-Rectangulo
+                        printf("Calculo de colision Rectangulo-Rectangulo \n");
+
+                        float x1, y1, x2, y2, x3, y3, x4, y4;
+                        printf("Ingresar coordenadas del primer rectangulo: \n");
+                        scanf("%f %f %f %f", &x1, &y1, &x2, &y2);
+                        printf("Ingresar coordenadas del segundo rectangulo: \n");
+                        scanf("%f %f %f %f", &x3, &y3, &x4, &y4);
+
+                        if (colision_rectangulos (x1, y1, x2, y2, x3, y3, x4, y4)) {
+                            printf("Las figuras colisionan \n");
+                        } else {
+                            printf("Las figuras NO colisionan \n");
+                        }
+                            break;
+                    }
+
+                }
+
+
                 break;
             }
             
@@ -86,7 +153,7 @@ int main () {
                 float x1, y1, x2, y2;
                 printf("Ingresar las coordenadas a estudiar: \n");
                 scanf("%f %f %f %f", &x1, &y1, &x2, &y2);
-                printf("La distancia entre los puntos es: \n"); // Llamado a la funcion distancia_puntos
+                printf("La distancia entre los puntos es: \n", distancia_puntos); 
                 break;
             }
             
