@@ -1,3 +1,5 @@
+// Fichero header para funciones
+
 // Funciones para el calculo del area (case 1)
 
 #define PI 3.141592
@@ -14,6 +16,7 @@ float perimetro_rectangulo (float largo, float ancho);
 
 float distancia_circulos (float x1, float y1, float radio1, float x2, float y2, float radio2);
 float distancia_circulo_rectangulo (float rectangulo_x, float rectangulo_y, float largo, float ancho, float circulo_x, float circulo_y, float radio);
+float distancia_rectangulos (float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 
 // Funciones para calcular la colision entre figuras (case 4)
 

@@ -1,4 +1,4 @@
-/* AGUSTINA PEREZ JORDAN - PRACTICA (Funciones)*/
+/* AGUSTINA PEREZ JORDAN - PRACTICA (Funciones) */
 
 #include <stdio.h>
 #include <math.h>
@@ -36,6 +36,32 @@ float distancia_circulo_rectangulo (float rectangulo_x, float rectangulo_y, floa
     return sqrt(pow(x_mas_cercano - circulo_x, 2) + pow(y_mas_cercano - circulo_y, 2));
 }
 
+float distancia_rectangulos(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
+    if (x1 < x4 && x2 > x3 && y1 < y4 && y2 > y3) { // Comprobar si los rectangulos se superponen
+        return 0; 
+    } 
+    
+    float distancia_ejeX = 0;
+     if (x2 < x3) {
+        distancia_ejeX = x3 - x2;
+      } else if (x4 < x1) {
+        distancia_ejeX = x1 - x4;
+      }
+
+      float distancia_ejeY = 0;
+     if (y2 < y3) {
+        distancia_ejeY = y3 - y2;
+      } else if (y4 < y1) {
+        distancia_ejeY = y1 - y4;
+      }
+
+    if (distancia_ejeX == 0 && distancia_ejeY == 0) { // Si la diferencia en ambos ejes es = 0, los rectangulos se superponen
+        return 0;
+    }
+
+    return sqrt(pow(distancia_ejeX, 2) + pow(distancia_ejeY, 2)); // Distancia euclidiana entre los bordes mas cercanos
+}
+
 // case 4: colision entre figuras
 
 float colision_circulos (float x1, float y1, float radio1, float x2, float y2, float radio2) {
@@ -57,5 +83,5 @@ float colision_rectangulos (float x1, float y1, float largo1, float ancho1,float
 
 
 float distancia_puntos (float x1, float y1, float x2, float y2) {
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)); 
+        return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)); 
 }

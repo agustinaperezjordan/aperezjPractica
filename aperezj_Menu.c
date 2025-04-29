@@ -1,4 +1,4 @@
-/* AGUSTINA PEREZ JORDAN - PRACTICA (MENU)*/
+/* AGUSTINA PEREZ JORDAN - PRACTICA (MENU) */
 
 #include <stdio.h>
 #include <math.h>
@@ -63,21 +63,53 @@ int main () {
             }
             
             case 3: { 
-                int figura;
-                printf("Seleccionar forma geometrica (1: Circulo, 2: Circulo y Rectangulo): \n");
-                scanf("%d", &figura);
+                int distancia;
+                printf("Seleccionar tipo de distancia a calcular (1: Circulo-Circulo, 2: Circulo-Rectangulo, 3: Rectangulo-Rectangulo): \n");
+                scanf("%d", &distancia);
 
-                if (figura == 1){
+                switch(distancia) {
+
+                    case 1: { // Circulo - Circulo
+                    printf("Calculo de distancia Circulo-Circulo \n");
+
                     float x1, y1, radio1, x2, y2, radio2;
                     printf("Ingresar coordenadas de los centros y los radios de cada circulo: \n");
                     scanf("%f %f %f %f %f %f", &x1, &y1, &radio1, &x2, &y2, &radio2);
-                    printf("La distancia entre los circulos es: \n", distancia_circulos);
-                     
-                } else if (figura == 2) {
+                    printf("La distancia entre los circulos es: %.3f\n", distancia_circulos);
+
+                    break;
+                    }
+
+
+                    case 2: { // Circulo - Rectangulo
+                    printf("Calculo de distancia Circulo-Rectangulo \n");
+
                     float rectangulo_x, rectangulo_y, largo, ancho, circulo_x, circulo_y, radio;
                     printf("Ingresar coordenadas del centro y radio del circulo, ademas de las coordenadas, el largo y ancho del rectangulo: \n");
                     scanf("%f %f %f %f %f %f %f", &rectangulo_x, &rectangulo_y, &largo, &ancho, &circulo_x, &circulo_y, &radio);
-                    printf("La distancia entre el circulo y el rectangulo es: \n", distancia_circulo_rectangulo);
+                    printf("La distancia entre el circulo y el rectangulo es: %.3f\n", distancia_circulo_rectangulo);
+
+                    break;
+                    }
+
+
+                    case 3: { // Rectangulo - Rectangulo
+                    printf("Calculo de distancia Rectangulo-Rectangulo \n");
+
+                    float x1, y1, x2, y2, x3, y3, x4, y4;
+                    printf("Ingresar coordenadas del primer rectangulo: \n");
+                    scanf("%f %f %f %f", &x1, &y1, &x2, &y2);
+                    printf("Ingresar coordenadas del segundo rectangulo: \n");
+                    scanf("%f %f %f %f", &x3, &y3, &x4, &y4);
+
+                    float distancia = distancia_rectangulos(x1, y1, x2, y2, x3, y3, x4, y4);
+                    if (distancia == 0) {
+                        printf("Los rectanulos se superponen, NO existe distancia entre ellos \n");
+                    } else {
+                        printf("La distancia entre los rectangulos es: %.3f\n", distancia);
+                    }
+                    return 0;
+                    }
 
                 }
                 
@@ -152,7 +184,8 @@ int main () {
                 float x1, y1, x2, y2;
                 printf("Ingresar las coordenadas a estudiar: \n");
                 scanf("%f %f %f %f", &x1, &y1, &x2, &y2);
-                printf("La distancia entre los puntos es: \n", distancia_puntos); 
+                printf("La distancia entre los puntos es: %.3f\n", distancia_puntos); 
+
                 break;
             }
             
